@@ -1,0 +1,86 @@
+package fileEncoding;
+
+import java.io.File;
+import java.io.FileOutputStream;
+import java.io.FileReader;
+import java.io.FileWriter;
+import java.io.OutputStream;
+import java.nio.file.Files;
+import java.util.Base64;
+
+public class fileEncoding {
+
+    public static void main(String[] args) {
+
+        fileEncoding encoding = new fileEncoding();
+        encoding.Decoding();
+        //encoding.Encoding();
+        // Oracle Database 11g Administration Workshop II part 1 D50079GC20_sg1.pdf
+        //encoding.EncodingPng();
+        System.out.println("done");
+    }
+
+    public void EncodingPng() {
+        try {
+            final Base64.Encoder encoder = Base64.getEncoder();
+            File f = new File("‪D://Red Hat Microservice Design_200605.pdf");
+            File result = new File("D://Red Hat Microservice Design_200605.pdf.txt");
+
+            byte zipbyte[] = Files.readAllBytes(f.toPath());
+            // final String encodedText = encoder.encodeToString(zipbyte);
+            
+            final String encodedText = new String(org.apache.commons.codec.binary.Base64.encodeBase64(zipbyte), "UTF-8");
+            // System.out.println(encodedText);
+            FileWriter writer = new FileWriter(result);
+            // writer.append(encodedText);
+            writer.write(encodedText);
+            writer.flush();
+            writer.close();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
+    public void Encoding() {
+        try {
+            final Base64.Encoder encoder = Base64.getEncoder();
+            File f = new File("D:\\Jack Shen\\Angular education\\my-app.7z");
+            File result = new File("D:\\Jack Shen\\Angular education\\my-app.zip.txt");
+            byte zipbyte[] = Files.readAllBytes(f.toPath());
+            final String encodedText = encoder.encodeToString(zipbyte);
+            // System.out.println(encodedText);
+            FileWriter writer = new FileWriter(result);
+            // writer.append(encodedText);
+            writer.write(encodedText);
+            writer.flush();
+            writer.close();
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
+    public void Decoding() {
+        try {
+            final Base64.Decoder decoder = Base64.getDecoder();
+            File f = new File("D:/SGDEV.war.txt");
+            File result = new File("‪D:/SGDEV.war");
+            byte zipbyte[] = Files.readAllBytes(f.toPath());
+            byte resultbyte[] = decoder.decode(zipbyte);
+            // System.out.println(encodedText);
+
+            OutputStream os = new FileOutputStream(result);
+
+            // Starts writing the bytes in it
+            os.write(resultbyte);
+            System.out.println("Successfully" + " byte inserted");
+
+            // Close the file
+            os.close();
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
+}
