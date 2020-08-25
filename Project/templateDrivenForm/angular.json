@@ -119,6 +119,10 @@
           }
         }
       }
-    }},
-  "defaultProject": "templateDrivenForm"
+    }
+  },
+  "defaultProject": "templateDrivenForm",
+  "cli": {
+    "analytics": "730934ef-7780-4897-a0e2-94004463591b"
+  }
 }
